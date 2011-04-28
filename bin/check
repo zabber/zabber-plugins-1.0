@@ -1,0 +1,18 @@
+#!/usr/local/zabber-plugins/bin/awk -f
+BEGIN{
+	if(ARGV[1]=="check"){
+		cmd="find /var/cache/zabber-plugins/ -maxdepth 1 -name "ARGV[2]" -cmin -"ARGV[3]
+		if(cmd|getline){
+			fname=$1
+			status="broken"
+			while(getline<fname){
+				if($1=="CHECK"){status=substr($0,7)}
+			}
+			print status 
+		}else print "nodata" 
+		exit
+	}else{
+		print "Usage " ARGV[0] " check <service> <minutes>"
+		exit 1
+	}
+}

@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# really should be executed by superscript wich will set up the environment
+# like run-check exim
+
+cache=/var/cache/zabber-plugins
+name=exim
+echo CHECK OK >$cache/$name.new
+mv $cache/$name.new $cache/$name

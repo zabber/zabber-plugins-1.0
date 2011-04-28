@@ -1,0 +1,1 @@
+UserParameter=exim.check,/usr/local/zabber-plugins/bin/check check exim 15
