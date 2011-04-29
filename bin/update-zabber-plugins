@@ -8,6 +8,6 @@ echo Ensure cache in $cache...
 mkdir -p $cache
 chown zabbix:zabbix $cache
 echo Assembling crontab
-cat $prefix/cron/*|crontab -u zabbix -
+cat $prefix/cron/* >/etc/cron.d/zabber
 echo Ensure $prefix/conf is included from agent"'"s config
 grep -q "^\s*[^#]*\s*Include\s*=\s*$prefix/conf/" $agentconf||echo Include=$prefix/conf/ >>$agentconf
