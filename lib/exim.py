@@ -2,7 +2,7 @@
 
 import os, re
 
-def parse_log(fname, trusted):
+def parse_mainlog(fname, trusted):
     (s_local, s_relay, s_other, s_error,d_local,d_relay,d_other,d_defer,d_failure,d_unknown) = (0,0,0,0,0,0,0,0,0,0,)
     id_defer={}
     id_failure={}
@@ -72,11 +72,35 @@ def parse_log(fname, trusted):
         'delivery.error.failure': len(id_failure),
     }
 
+def parse_rejectlog(fname, trusted):
+    reasons = {
+        'reject.relay': 'relay not permitted',
+        'reject.unrouteable': 'Unrouteable address',
+        'reject.other': 'x',
+    }
+    rev = {}
+    res = {}
+    for r in reasons.keys():
+        rev[reasons[r]] = r
+        res[r] = 0
+    reject = re.compile(".*: ([^:]+)\n")
+    f = open(fname, 'r')
+    for l in f.readlines():
+        r = reject.match(l)
+        if r:
+            (reason,) = r.groups()
+            key = rev.get(reason, 'reject.other')
+            res[key]+=1
+    return res
+
 def collect(f):
-    ret = parse_log('/var/log/exim4/mainlog',{})
-    f.write("CHECK OK\n")
+    ret = parse_mainlog('/var/log/exim4/mainlog',{})
     for k in ret.keys():
         f.write("%s %s\n" % (k, ret[k]))
+    ret = parse_rejectlog('/var/log/exim4/rejectlog',{})
+    for k in ret.keys():
+        f.write("%s %s\n" % (k, ret[k]))
+    f.write("CHECK OK\n")
 
 if __name__ == '__main__':
     import sys

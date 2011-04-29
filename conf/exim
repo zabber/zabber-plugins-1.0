@@ -9,3 +9,5 @@ UserParameter=exim.submit.from.error,grep submit.from.error /var/cache/zabber-pl
 UserParameter=exim.delivery.to.other,grep delivery.to.other /var/cache/zabber-plugins/exim
 UserParameter=exim.delivery.to.unknown,grep delivery.to.unknown /var/cache/zabber-plugins/exim
 UserParameter=exim.submit.from.other,grep submit.from.other /var/cache/zabber-plugins/exim
+UserParameter=exim.reject.unrouteable,grep reject.unrouteable /var/cache/zabber-plugins/exim
+UserParameter=exim.reject.relay,grep reject.relay /var/cache/zabber-plugins/exim
