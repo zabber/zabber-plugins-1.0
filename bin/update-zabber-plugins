@@ -1,7 +1,13 @@
 #!/bin/sh
 prefix=/usr/local/zabber-plugins
 agentconf=/etc/zabbix/zabbix_agentd.conf
-mkdir -p /var/cache/zabber-plugins
-chown zabbix:zabbix /var/cache/zabber-plugins
+cache=/var/cache/zabber-plugins
+echo Agent"'"s config is $agentconf
+echo Plugins prefix is $prefix
+echo Ensure cache in $cache...
+mkdir -p $cache
+chown zabbix:zabbix $cache
+echo Assembling crontab
 cat $prefix/cron/*|crontab -u zabbix -
+echo Ensure $prefix/conf is included from agent"'"s config
 grep -q "^\s*[^#]*\s*Include\s*=\s*$prefix/conf/" $agentconf||echo Include=$prefix/conf/ >>$agentconf
