@@ -93,13 +93,24 @@ def parse_rejectlog(fname, trusted):
             res[key]+=1
     return res
 
+def queue_size():
+    from commands import getstatusoutput
+    (status, res) = getstatusoutput('exim -bpc')
+    if status == 0:
+        return res
+    else:
+        # XXX raise failure here
+        return 0
+
 def collect(f):
+    # XXX should catch errors and reflect CHECK
     ret = parse_mainlog('/var/log/exim4/mainlog',{})
     for k in ret.keys():
         f.write("%s %s\n" % (k, ret[k]))
     ret = parse_rejectlog('/var/log/exim4/rejectlog',{})
     for k in ret.keys():
         f.write("%s %s\n" % (k, ret[k]))
+    f.write("queue %s\n" % queue_size())
     f.write("CHECK OK\n")
 
 if __name__ == '__main__':
