@@ -1,1 +1,1 @@
-*/15 * * * * /usr/local/zabber-plugins/checks/exim
+*/15 * * * * /usr/local/zabber-plugins/bin/check collect exim

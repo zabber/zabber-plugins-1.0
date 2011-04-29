@@ -1,18 +1,38 @@
-#!/usr/local/zabber-plugins/bin/awk -f
-BEGIN{
-	if(ARGV[1]=="check"){
-		cmd="find /var/cache/zabber-plugins/ -maxdepth 1 -name "ARGV[2]" -cmin -"ARGV[3]
-		if(cmd|getline){
-			fname=$1
-			status="broken"
-			while(getline<fname){
-				if($1=="CHECK"){status=substr($0,7)}
-			}
-			print status 
-		}else print "nodata" 
-		exit
-	}else{
-		print "Usage " ARGV[0] " check <service> <minutes>"
-		exit 1
-	}
-}
+#!/usr/bin/python
+
+import sys, os
+
+prefix = "/usr/local/zabber-plugins"
+cache = "/var/cache/zabber-plugins"
+
+sys.path[0:0] = [ prefix, ]
+
+def usage():
+    print "Usage: %s check <sybsystem> <minutes> | collect <subsystem>" % sys.argv[0]
+    sys.exit(1)
+
+if len(sys.argv) < 2:
+    usage()
+
+cmd = sys.argv[1]
+if cmd == 'check':
+    if len(sys.argv) < 4:
+        usage()
+    else:
+        import lib.check
+        subsys = sys.argv[2]
+        period = sys.argv[3]
+        print lib.check.execute(subsys,period,cache)
+elif cmd == 'collect':
+    if len(sys.argv) < 3:
+        usage()
+    else:
+        import shutil
+        subsys = sys.argv[2]
+        exec('import lib.%s' % subsys)
+        fname = os.path.join(cache,subsys)
+        fnew = fname+'.new'
+        f = open(fnew, 'w')
+        exec('lib.%s.collect(f)' % subsys)
+        f.close()
+        shutil.move(fnew, fname)

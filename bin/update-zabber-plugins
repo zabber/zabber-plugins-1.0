@@ -1,7 +1,6 @@
 #!/bin/sh
 prefix=/usr/local/zabber-plugins
 agentconf=/etc/zabbix/zabbix_agentd.conf
-ln -sf `which awk` $prefix/bin/awk
 mkdir -p /var/cache/zabber-plugins
 chown zabbix:zabbix /var/cache/zabber-plugins
 cat $prefix/cron/*|crontab -u zabbix -
