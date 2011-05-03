@@ -3,7 +3,7 @@
 import sys, os
 
 prefix = "/usr/local/zabber-plugins"
-cache = "/var/cache/zabber-plugins"
+cache = "/var/cache/zabber-plugins/data"
 
 sys.path[0:0] = [ prefix, ]
 
