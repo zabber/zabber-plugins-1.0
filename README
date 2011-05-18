@@ -1,27 +1,29 @@
-h1. Zabber-plugins 1.0
+Zabber-plugins 1.0
+==================
 
 The infrastructure and the collection of plugins for
-[http://zabbix.com Zabbix] monitoring engine.
+Zabbix http://zabbix.com monitoring engine.
 
-Maintained by [http://zabber.ru Zabber.ru] on-line monitoring service.
+Maintained by http://zabber.ru on-line monitoring service.
 
-h2. Install
+Install
+==================
 
-Install [http://git-scm.org git].
-<pre>
-git clone git://github.com/zabber/zabber-plugins-1.0.git /usr/local/zabber-plugins
-</pre>
+Install Git http://git-scm.org.
+
+# git clone git://github.com/zabber/zabber-plugins-1.0.git /usr/local/zabber-plugins
+
 Note, the location SHOULD be exact.
 Note 2, this is development version. Production deployment scheme will be improved.
 
 Issue
-<pre>
-/usr/local/zabber-plugins/bin/update-zabber-plugins
-</pre>
+
+# /usr/local/zabber-plugins/bin/update-zabber-plugins
+
 
 Restart zabbix-agentd
 
-Go to the [http://zabber.ru Zabber.ru] to connect particular templates.
+Go to the Zabber control panel http://cp.zabber.ru/ to connect particular templates.
 
 Note, we'll planning also to release the corresponding templates, but they are at
 development stage yet.
