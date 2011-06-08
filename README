@@ -14,7 +14,7 @@ Install from tarball
 
 Under root user:
 
-# wget http://wiki.zabber.ru/Downloads/zabber-plugins-1.0.tgz
+# wget http://wiki.zabber.ru/downloads/zabber-plugins-1.0.tgz
 # cd /usr/local
 # tar xzvf where-you-saved/zabber-plugins-1.0.tgz
 # cd zabber-plugins
@@ -62,7 +62,7 @@ Upgrade from tarball
 
 Under root user:
 
-# wget http://wiki.zabber.ru/Downloads/zabber-plugins-1.0.tgz
+# wget http://wiki.zabber.ru/downloads/zabber-plugins-1.0.tgz
 # cd /usr/local
 # tar xzvf where-you-saved/zabber-plugins-1.0.tgz
 # cd zabber-plugins
