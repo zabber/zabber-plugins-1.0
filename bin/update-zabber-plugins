@@ -9,9 +9,11 @@ echo Plugins prefix is $prefix
 echo Ensure cache in $cache...
 mkdir -p $cache $cache/data $cache/tmp
 chown zabbix:zabbix $cache
+echo Ensure enabled plugins directory in $prefix/enabled
+mkdir -p $prefix/enabled
 echo Assembling crontab into $crontab
 echo 'PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"' >$tmpcrontab
-cat $prefix/cron/* >>$tmpcrontab
+cat $prefix/enabled/*/cron >>$tmpcrontab
 mv $tmpcrontab $crontab
 echo Ensure $prefix/conf is included from agent"'"s config
 grep -q "^\s*[^#]*\s*Include\s*=\s*$prefix/conf/" $agentconf||echo Include=$prefix/conf/ >>$agentconf
