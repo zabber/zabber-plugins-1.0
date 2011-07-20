@@ -7,6 +7,28 @@ crontab=/etc/cron.d/zabber-plugins
 echo Agent"'"s config is $agentconf
 echo Plugins prefix is $prefix
 echo Ensure cache in $cache...
+if [ ! -f $agentconf ]; then
+	cat <<EOF
+
+STOP!!!
+
+Zabbix agent's config $agentconf not found.
+Probably zabbix agent is not installed or not configured.
+
+You should install zabbix agent from your OS distribution
+(AT LEAST VERSION 1.8.2).
+Or you may download binary from
+http://www.zabbix.com/downloads/
+and use our script $prefix/bin/zabbix-agent-install.sh
+to install it.
+
+Next you should tune your $agentconf file according to
+Zabbix server parameters.
+
+And finally returns here and try again.
+EOF
+exit 1
+fi
 mkdir -p $cache $cache/data $cache/tmp
 chown zabbix:zabbix $cache
 echo Ensure enabled plugins directory in $prefix/enabled
