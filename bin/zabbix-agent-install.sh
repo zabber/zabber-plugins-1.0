@@ -1,12 +1,17 @@
 #!/bin/bash
 
-if [ -z "$1" -o ! -f "$1" ]; then
+if [ "$1" = "-h" ]; then
 	cat <<EOF
 Zabbix agent binary installation script.
 
 (C) SkyCover. http://www.skycover.ru/
 
-Usage: $0 zabbix_agent_binary_package.tar.gz
+Usage:
+$0
+to automatic download and detect zabbix binary package.
+Or
+$0 zabbix_agent_binary_package.tar.gz
+to specify zabbix binary package as argument.
 
 Zabbix agent binary package should be downloaded from
 http://www.zabbix.com/downloads/ for your Linux kernel version
@@ -54,6 +59,43 @@ set -e
 echo Check for user and group
 getent group $group || groupadd $group
 getent passwd $user || useradd $user -s/bin/false -d $homedir -U $group
+
+if [ -n "$1" ]; then
+	binfile="$1"
+else
+url=`uname -a|awk '
+BEGIN{
+u["2.4+i386"]="http://www.zabbix.com/downloads/1.8.5/zabbix_agents_1.8.5.linux2_4.i386.tar.gz"
+u["2.6+i386"]="http://www.zabbix.com/downloads/1.8.5/zabbix_agents_1.8.5.linux2_6.i386.tar.gz"
+u["2.6+x86_64"]="http://www.zabbix.com/downloads/1.8.5/zabbix_agents_1.8.5.linux2_6.amd64.tar.gz"
+u["2.6.23+i386"]="http://www.zabbix.com/downloads/1.8.5/zabbix_agents_1.8.5.linux2_6_23.i386.tar.gz"
+u["2.6.23+x86_64"]="http://www.zabbix.com/downloads/1.8.5/zabbix_agents_1.8.5.linux2_6_23.amd64.tar.gz"
+}
+//{
+if($3 ~ /^2.4/)s="2.4"
+else if($3 ~ /^2.6.2[3-9]/)s="2.6.23"
+else if($3 ~ /^2.6.[3-9]/)s="2.6.23"
+else if($3 ~ /^2.6/)s="2.6"
+print u[s"+"$(NF-1)]
+}
+'`
+	if [ -z "$url" ]; then
+		echo There is no binary file for this architecture:
+		uname -a
+		echo Please leave message on http://cp.skycover.ru/feedback/
+	else
+		echo Downloading "$url"
+		binfile=`echo $url|awk -F/ '{print $NF}'`
+		echo Binary file will be $binfile
+		test -f "$binfile" && mv "$binfile" "$binfile.old"
+		wget "$url"
+	fi
+fi
+
+if [ ! -f "$binfile" ]; then
+	echo File "$1" not found
+	exit 1
+fi
 
 echo Creating directories
 mkdir -p $bin_prefix/bin $bin_prefix/sbin $confdir $logdir
