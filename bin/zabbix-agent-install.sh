@@ -28,12 +28,18 @@ logdir=/var/log/zabbix-agent
 # for compatibility
 homedir=/var/run/zabbix-server
 initscript=/etc/init.d/zabbix-agent
+instlog=agent_install.log
 user=zabbix
 group=zabbix
 
+test -f "$instlog" && mv "$instlog" "$instlog.old"
+
+{
 cat <<EOF
 
 Installing Zabbix agent binary
+
+The installation log will be in "$instlog"
 
 /bin and /sbin will be under $bin_prefix
 config will be in $confdir
@@ -106,7 +112,9 @@ chmod 755 $confdir
 
 echo Unpacking
 wd=`pwd`
-(cd $bin_prefix; tar zxvf $wd/$1)
+(cd $bin_prefix; tar zxvf $wd/$binfile)
+
+echo Creating initscript
 cat <<EOF >$initscript
 #! /bin/sh
 ### BEGIN INIT INFO
@@ -179,3 +187,5 @@ esac
 exit 0
 EOF
 chmod 755 $initscript
+echo Done
+} 2>&1 |tee "$instlog"
