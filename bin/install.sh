@@ -9,7 +9,16 @@ mkdir -p $prefix
 
 cp -a $wd/* $prefix
 cd $prefix
-test "$1" != "noagent" && bin/zabbix-agent-install.sh
+if [ "$1" != "noagent" ]; then
+	if [ -f /usr/sbin/zabbix_agentd ]; then
+		echo ============================================================
+		echo Zabbix Agent already installed. Skipping agent installation.
+		echo ============================================================
+	else
+		bin/zabbix-agent-install.sh
+	fi
+fi
+
 bin/update-zabber-plugins
 
 echo Done.
