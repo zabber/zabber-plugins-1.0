@@ -4,7 +4,7 @@ if [ "$1" = "-h" ]; then
 	cat <<EOF
 Zabbix agent binary installation script.
 
-(C) SkyCover. http://www.skycover.ru/
+(C) Zabber. http://www.zabber.ru/
 
 Usage:
 $0
@@ -88,7 +88,7 @@ print u[s"+"$(NF-1)]
 	if [ -z "$url" ]; then
 		echo There is no binary file for this architecture:
 		uname -a
-		echo Please leave message on http://cp.skycover.ru/feedback/
+		echo Please leave message on http://cp.zabber.ru/feedback/
 	else
 		echo Downloading "$url"
 		binfile=`echo $url|awk -F/ '{print $NF}'`

@@ -27,5 +27,5 @@ cat <<EOF
 
 You should place right config into $agentconf 
 
-You can get it from http://www.skycover.ru service.
+You can get it from http://www.zabber.ru service.
 EOF
