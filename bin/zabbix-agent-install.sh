@@ -64,7 +64,7 @@ fi
 set -e
 echo Check for user and group
 getent group $group || groupadd $group
-getent passwd $user || useradd $user -s/bin/false -d $homedir -U $group
+getent passwd $user || useradd $user -s/bin/false -d $homedir -g $group
 
 if [ -n "$1" ]; then
 	binfile="$1"
