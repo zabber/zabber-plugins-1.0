@@ -9,7 +9,7 @@ mkdir -p $prefix
 
 cp -a $wd/* $prefix
 cd $prefix
-bin/zabbix-agent-install.sh
+test "$1" != "noagent" && bin/zabbix-agent-install.sh
 bin/update-zabber-plugins
 
 echo Done.
