@@ -1,0 +1,172 @@
+commit 4424cccbcc3184835f06981f5f38441ef9325668
+Author: Dmitry Chernyak <dmi.chernyak@gmail.com>
+Date:   Mon Sep 5 20:30:31 2011 +0400
+
+    Exim maiden aware of 'exim' or 'exim4' names
+
+commit 5c2bedbc08dced289092e98de3b5b1e11cf11355
+Author: Dmitry Chernyak <dmi.chernyak@gmail.com>
+Date:   Sun Aug 28 22:48:06 2011 +0400
+
+    Corrected copiright links
+
+commit 46d35ae5f50cd2ee80e02d087e0ca0400f16b119
+Author: Dmitry Chernyak <dmi.chernyak@gmail.com>
+Date:   Sun Aug 28 16:01:00 2011 +0400
+
+    Improved check for packaged agent's presence
+
+commit 18e72ce4d600dc94e721d09846abb71309a3f2df
+Author: Dmitry Chernyak <dmi.chernyak@gmail.com>
+Date:   Sun Aug 28 15:58:15 2011 +0400
+
+    Fixed useradd compatibility issue
+
+commit f5fcd84f40b73aafdf19666160db5b709fbef40c
+Author: Dmitry Chernyak <dmi.chernyak@gmail.com>
+Date:   Sun Aug 28 15:39:33 2011 +0400
+
+    Added noagent option to install.sh
+
+commit c0c41ba2b4182b9830a5b76eef1dde640ed5b981
+Author: Dmitry Chernyak <dmi.chernyak@gmail.com>
+Date:   Sun Aug 28 01:04:28 2011 +0400
+
+    Added general installation script
+
+commit af8a7dd4c69640ab084e3b852e0cadda9e7a1a26
+Author: Dmitry Chernyak <dmi.chernyak@gmail.com>
+Date:   Sun Aug 28 00:27:31 2011 +0400
+
+    Added logging
+
+commit 400ca3527e1fd60a1092d71ce9ca492a0c95f6f1
+Author: Dmitry Chernyak <dmi.chernyak@gmail.com>
+Date:   Sun Aug 28 00:15:03 2011 +0400
+
+    Add binary auto download
+
+commit 076597f21d0624bf1dc151317d574c6079fd2510
+Author: Dmitry Chernyak <dmi.chernyak@gmail.com>
+Date:   Thu Jul 21 01:09:38 2011 +0400
+
+    Added zabbix agent binary package install-script
+    
+    update-zabber-plugins now checks for zabbix_agentd.conf
+
+commit 3e7f65d0dab0835c29846651c7e64a81939d12a4
+Author: Dmitry Chernyak <dmi.chernyak@gmail.com>
+Date:   Wed Jun 8 23:45:53 2011 +0400
+
+    updated download path in README
+
+commit 97390f792a0bf39f444ca8060d82aaf744aa5069
+Author: Dmitry Chernyak <dmi.chernyak@gmail.com>
+Date:   Wed Jun 8 21:47:33 2011 +0400
+
+    Adjusted README instructions
+
+commit d0a9a860e84bbee10e5ef71aff8aeb6e191d7aeb
+Author: Dmitry Chernyak <dmi.chernyak@gmail.com>
+Date:   Wed Jun 8 18:23:24 2011 +0400
+
+    Creating plugins collection infrastructure
+    
+    Plugins are now located in $prefix/avail/NAME/ directories
+    which contains configuration files
+    Currently only "cron" file is supported
+    
+    To enable plugin it shoul be linked into $prefix/enabled/
+    Example:
+    cd enabled; ln -s ../avail/exim
+
+commit 93ed05daab1cf03a9e9c37b5214d7fc14cc95317
+Author: Dmitry Chernyak <dmi.chernyak@gmail.com>
+Date:   Wed May 18 10:23:45 2011 +0400
+
+    README converted to plain
+
+commit ba0618cd99b61583e6fad460b9f3850b099a9b4c
+Author: Dmitry Chernyak <dmi.chernyak@gmail.com>
+Date:   Tue May 3 19:33:44 2011 +0400
+
+    Added reject.other into exim conf
+
+commit 4e7b939617c17b767f85301c8495533467e260ce
+Author: Dmitry Chernyak <dmi.chernyak@gmail.com>
+Date:   Tue May 3 19:27:43 2011 +0400
+
+    Fixed crontab generation
+    
+    Added PATH declaration
+    Maiden more securely
+    
+    NOTE: you should remove /etc/con.d/zabber if any after upgrade
+
+commit aebdb4cdc7685ffbf5269d9fa9f9da7f514a1d21
+Author: Dmitry Chernyak <dmi.chernyak@gmail.com>
+Date:   Tue May 3 19:20:15 2011 +0400
+
+    Renamed exim config
+
+commit 126339d2babaa058047f57885ae00b5ea6b3bfc3
+Author: Dmitry Chernyak <dmi.chernyak@gmail.com>
+Date:   Sat Apr 30 01:59:34 2011 +0400
+
+    Fixed userparameters
+
+commit 7d1e886cd6473d2fd488156de1cb126a1953abd7
+Author: Dmitry Chernyak <dmi.chernyak@gmail.com>
+Date:   Sat Apr 30 01:59:22 2011 +0400
+
+    Exim queue collection
+
+commit acb06febde3bb9fd20cf3f28b62ef33b9da4c81b
+Author: Dmitry Chernyak <dmi.chernyak@gmail.com>
+Date:   Sat Apr 30 01:45:43 2011 +0400
+
+    Added reject collecting
+
+commit d9c7d6c9701462953fe7fc96664a90809ae49451
+Author: Dmitry Chernyak <dmi.chernyak@gmail.com>
+Date:   Sat Apr 30 01:17:16 2011 +0400
+
+    minor crontab fix
+
+commit 7c01b6199ced55d4de80c530573774ec48ce3531
+Author: Dmitry Chernyak <dmi.chernyak@gmail.com>
+Date:   Sat Apr 30 01:15:03 2011 +0400
+
+    fixed crontab
+
+commit c0caf01bda7c9d6ed332aac3bfb820e6e78e58af
+Author: Dmitry Chernyak <dmi.chernyak@gmail.com>
+Date:   Sat Apr 30 00:57:07 2011 +0400
+
+    Added README
+
+commit 178bf2ed839f1bdeac1703d7341204fcf3c755f9
+Author: Dmitry Chernyak <dmi.chernyak@gmail.com>
+Date:   Sat Apr 30 00:43:33 2011 +0400
+
+    Fixed exim userparameters
+
+commit 2cf9b2abc40ea0092988a5952e95103f083cda40
+Author: Dmitry Chernyak <dmi.chernyak@gmail.com>
+Date:   Sat Apr 30 00:36:58 2011 +0400
+
+    Annotated update script
+
+commit 91db86340f0d37bbf7e6608061e9321b658a6f78
+Author: Dmitry Chernyak <dmi.chernyak@gmail.com>
+Date:   Sat Apr 30 00:31:58 2011 +0400
+
+    Pythonized, implemented exim
+    
+    exim w/o rejects and userparameters
+
+commit b368ceae4d06501a6c57f7268a4f3957d0854a6b
+Author: Dmitry Chernyak <dmi.chernyak@gmail.com>
+Date:   Thu Apr 28 15:26:21 2011 +0400
+
+    Initial commit
