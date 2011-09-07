@@ -1,15 +1,23 @@
 #!/bin/sh
+set -e
 prefix=/usr/local/zabber-plugins
 agentconf=/etc/zabbix/zabbix_agentd.conf
 cache=/var/cache/zabber-plugins
 tmpcrontab=$cache/tmp/crontab
 crontab=/etc/cron.d/zabber-plugins
-echo Agent"'"s config is $agentconf
-echo Plugins prefix is $prefix
-echo Ensure cache in $cache...
+cat <<EOF
+=========================================================
+Zabber plugins' parameters
+
+Agent's config expected in $agentconf
+Plugins prefix is          $prefix
+Cached data in             $cache
+Crontab job is             $crontab
+=========================================================
+EOF
 if [ ! -f $agentconf ]; then
 	cat <<EOF
-
+=========================================================
 STOP!!!
 
 Zabbix agent's config $agentconf not found.
@@ -17,25 +25,53 @@ Probably zabbix agent is not installed or not configured.
 
 You should install zabbix agent from your OS distribution
 (AT LEAST VERSION 1.8.2).
-Or you may download binary from
-http://www.zabbix.com/downloads/
-and use our script $prefix/bin/zabbix-agent-install.sh
-to install it.
+Or you may install binary by theese commands:
 
-Next you should tune your $agentconf file according to
-Zabbix server parameters.
+# cd $prefix
+# bin/zabbix-agent-install.sh
+
+Next you should set up your $agentconf file according to
+Zabbix server parameters - visit http://www.zabber.ru
 
 And finally returns here and try again.
+=========================================================
 EOF
 exit 1
 fi
+echo -n Ensuring cache directories...
 mkdir -p $cache $cache/data $cache/tmp
 chown zabbix:zabbix $cache
-echo Ensure enabled plugins directory in $prefix/enabled
+echo done.
+echo Ensuring enabled plugins directory $prefix/enabled ...
 mkdir -p $prefix/enabled
-echo Assembling crontab into $crontab
+echo done.
+echo Ensuring $prefix/conf is included from agent"'"s config...
+grep -q "^\s*[^#]*\s*Include\s*=\s*$prefix/conf/" $agentconf||echo Include=$prefix/conf/ >>$agentconf
+echo done.
+cat <<EOF
+=========================================================
+Zabber plugins infrastructure is ready!
+Now updating enabled plugins
+Visit http://wiki.zabber.ru for more info
+=========================================================
+EOF
+set +e
+echo Assembling crontab into $crontab ...
 echo 'PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"' >$tmpcrontab
 cat $prefix/enabled/*/cron >>$tmpcrontab
+if [ $? -gt 0 ]; then
+ echo failed.
+ echo Removing cron job.
+ rm $crontab
+ exit 1
+fi
+echo done.
+set -e
+echo -n Installing new crontab $crontab ...
 mv $tmpcrontab $crontab
-echo Ensure $prefix/conf is included from agent"'"s config
-grep -q "^\s*[^#]*\s*Include\s*=\s*$prefix/conf/" $agentconf||echo Include=$prefix/conf/ >>$agentconf
+echo done.
+cat <<EOF
+=========================================================
+Enabled plugins are sucessfully updated!
+=========================================================
+EOF
