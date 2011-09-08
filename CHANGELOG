@@ -1,3 +1,29 @@
+commit 9ad1230ff9540325e1fda5ed3093f43805ee5cd1
+Author: Dmitry Chernyak <dmi.chernyak@gmail.com>
+Date:   Fri Sep 9 00:20:15 2011 +0400
+
+    Fixed exim log names for centos
+    
+    Now the logs for exim are searched as follows:
+    /var/log/exim4, /var/log/exim
+    mainlog, main.log
+    rejectlog, reject.log
+    
+    The first match of above combinations is given.
+    If mainlog is not found, the error is generated.
+
+commit 485eae9efe4924bc89e9c814e4f14d0ca9dc5c63
+Author: Dmitry Chernyak <dmi.chernyak@gmail.com>
+Date:   Wed Sep 7 15:48:20 2011 +0400
+
+    More diagnostics in update-plugins script
+
+commit d20b2f9e34b798ff127e3a80b52a28e6d64b482a
+Author: Dmitry Chernyak <dmi.chernyak@gmail.com>
+Date:   Wed Sep 7 11:09:20 2011 +0400
+
+    Added changelog to trac version installed
+
 commit 4424cccbcc3184835f06981f5f38441ef9325668
 Author: Dmitry Chernyak <dmi.chernyak@gmail.com>
 Date:   Mon Sep 5 20:30:31 2011 +0400
