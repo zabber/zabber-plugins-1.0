@@ -105,20 +105,31 @@ def queue_size():
 def collect(f):
     # XXX should catch errors and reflect CHECK
     import os
-    if os.path.exists('/var/log/exim4'):
-        logpath = '/var/log/exim4'
-    elif os.path.exists('/var/log/exim'):
-        logpath = '/var/log/exim'
+    mainlog = False
+    rejectlog = False
+    for p in [ '/var/log/exim', '/var/log/exim4' ]:
+        for l in [ 'main.log', 'mainlog' ]:
+            pp = '%s/%s' % (p, l)
+            if os.path.exists(pp):
+                mainlog = pp
+        for l in [ 'reject.log', 'rejectlog' ]:
+            pp = '%s/%s' % (p, l)
+            if os.path.exists(pp):
+                rejectlog = pp
+
+    if mainlog:
+        ret = parse_mainlog(mainlog, {})
+        for k in ret.keys():
+            f.write("%s %s\n" % (k, ret[k]))
     else:
         f.write("CHECK FAILED: no logs found\n")
         return
 
-    ret = parse_mainlog('%s/mainlog' % logpath,{})
-    for k in ret.keys():
-        f.write("%s %s\n" % (k, ret[k]))
-    ret = parse_rejectlog('%s/rejectlog' % logpath,{})
-    for k in ret.keys():
-        f.write("%s %s\n" % (k, ret[k]))
+    if rejectlog:
+        ret = parse_rejectlog(rejectlog, {})
+        for k in ret.keys():
+            f.write("%s %s\n" % (k, ret[k]))
+
     f.write("queue %s\n" % queue_size())
     f.write("CHECK OK\n")
 
