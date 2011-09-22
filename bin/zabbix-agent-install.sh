@@ -69,7 +69,9 @@ getent passwd $user || useradd $user -s/bin/false -d $homedir -g $group
 if [ -n "$1" ]; then
 	binfile="$1"
 else
-url=`uname -a|awk '
+in_debian=0
+test -f /etc/debian_version && in_debian=1
+url=`uname -a|awk -vin_debian=$in_debian '
 BEGIN{
 u["2.4+i386"]="http://www.zabbix.com/downloads/1.8.5/zabbix_agents_1.8.5.linux2_4.i386.tar.gz"
 u["2.6+i386"]="http://www.zabbix.com/downloads/1.8.5/zabbix_agents_1.8.5.linux2_6.i386.tar.gz"
@@ -79,7 +81,8 @@ u["2.6.23+x86_64"]="http://www.zabbix.com/downloads/1.8.5/zabbix_agents_1.8.5.li
 }
 //{
 if($3 ~ /^2.4/)s="2.4"
-else if($3 ~ /^2.6.2[3-9]/)s="2.6.23"
+else if(in_debian && ($3 ~ /^2.6.2[7-9]/))s="2.6.23"
+else if(!in_debian && ($3 ~ /^2.6.2[3-9]/))s="2.6.23"
 else if($3 ~ /^2.6.[3-9]/)s="2.6.23"
 else if($3 ~ /^2.6/)s="2.6"
 print u[s"+"$(NF-1)]
