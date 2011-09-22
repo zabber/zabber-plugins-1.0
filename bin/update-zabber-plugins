@@ -58,11 +58,11 @@ EOF
 set +e
 echo Assembling crontab into $crontab ...
 echo 'PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"' >$tmpcrontab
-cat $prefix/enabled/*/cron >>$tmpcrontab
+cat $prefix/enabled/*/cron >>$tmpcrontab 2>/dev/null
 if [ $? -gt 0 ]; then
- echo failed.
+ echo "Operation failed (possible there aren't jobs for cron)"
  echo Removing cron job.
- rm $crontab
+ test -f "$crontab" && rm $crontab
  exit 1
 fi
 echo done.
