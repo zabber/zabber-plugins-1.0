@@ -159,9 +159,12 @@ case "\$1" in
 	;;
   stop)
     #XXX Ugly? Yes.
-    echo "Stopping \$DESC" "\$NAME"
-    killall \$DAEMON
-    ps axo cmd|grep -q ^\$DAEMON && (sleep 5; ps axo cmd|grep -q ^\$DAEMON && killall -9 \$DAEMON)
+    # With kill -9 there is no need with all theese checks,
+    # but I hope once upon a time the agent will start answer to the graceful kill.
+    echo "Stopping $DESC" "$NAME"
+    ps axo cmd|grep -q ^$DAEMON && killall -9 $NAME
+    ps axo cmd|grep -q ^$DAEMON && (sleep 5; ps axo cmd|grep -q ^$DAEMON && killall -9 $NAME)
+    ps axo cmd|grep -q ^$DAEMON
     case "\$?" in
         0) echo Ok ;;
         *) echo Failed; exit 1 ;;
