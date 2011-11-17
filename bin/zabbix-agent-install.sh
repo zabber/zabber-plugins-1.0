@@ -75,8 +75,10 @@ url=`uname -a|awk -vin_debian=$in_debian '
 BEGIN{
 u["2.4+i386"]="http://www.zabbix.com/downloads/1.8.5/zabbix_agents_1.8.5.linux2_4.i386.tar.gz"
 u["2.6+i386"]="http://www.zabbix.com/downloads/1.8.5/zabbix_agents_1.8.5.linux2_6.i386.tar.gz"
+u["2.6+i686"]="http://www.zabbix.com/downloads/1.8.5/zabbix_agents_1.8.5.linux2_6.i386.tar.gz"
 u["2.6+x86_64"]="http://www.zabbix.com/downloads/1.8.5/zabbix_agents_1.8.5.linux2_6.amd64.tar.gz"
 u["2.6.23+i386"]="http://www.zabbix.com/downloads/1.8.5/zabbix_agents_1.8.5.linux2_6_23.i386.tar.gz"
+u["2.6.23+i686"]="http://www.zabbix.com/downloads/1.8.5/zabbix_agents_1.8.5.linux2_6_23.i386.tar.gz"
 u["2.6.23+x86_64"]="http://www.zabbix.com/downloads/1.8.5/zabbix_agents_1.8.5.linux2_6_23.amd64.tar.gz"
 }
 //{
