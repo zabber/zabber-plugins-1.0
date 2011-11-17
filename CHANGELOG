@@ -1,3 +1,36 @@
+commit 6d0d61a4b8867899824ba5c1538cf98f5400f8d0
+Author: Dmitry Chernyak <dmi.chernyak@gmail.com>
+Date:   Thu Nov 17 13:43:19 2011 +0400
+
+    Added i686 architecture
+
+commit 7353ba3d57bba9c76e69afb23104f4acd69f1d5d
+Author: Dmitry Chernyak <dmi.chernyak@gmail.com>
+Date:   Thu Sep 22 11:03:50 2011 +0400
+
+    Fixed aent init script
+
+commit 6d53dadb620ab05b44511049638304159e05a8bc
+Author: Dmitry Chernyak <dmi.chernyak@gmail.com>
+Date:   Thu Sep 22 10:45:57 2011 +0400
+
+    Fixed agent package selection dor Debian
+    
+    For Debian kernels 2.6.26 and below the agent version
+    2.6.26 (and not 2.6.23) should be used.
+
+commit d70c71ac7334685c66d80b059f610cd6074937a4
+Author: Dmitry Chernyak <dmi.chernyak@gmail.com>
+Date:   Thu Sep 22 10:38:28 2011 +0400
+
+    Nicely handle the case when no cron jobs to install
+
+commit 5a67616fa1d3c559383e939098347f6671a8ac68
+Author: Dmitry Chernyak <dmi.chernyak@gmail.com>
+Date:   Fri Sep 9 00:23:15 2011 +0400
+
+    CHANGELOG updated
+
 commit 9ad1230ff9540325e1fda5ed3093f43805ee5cd1
 Author: Dmitry Chernyak <dmi.chernyak@gmail.com>
 Date:   Fri Sep 9 00:20:15 2011 +0400
